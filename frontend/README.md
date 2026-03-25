@@ -39,7 +39,7 @@ src/
 ├── pages/
 │   ├── landing.tsx      # Hero, how-it-works, features, CTA
 │   ├── dashboard.tsx    # Quest list with stats
-│   ├── workspace.tsx    # Quest detail (milestones + enrollees)
+│   ├── quest.tsx        # Quest detail (milestones + enrollees)
 │   └── profile.tsx      # User profile + earnings history
 ├── hooks/
 │   └── use-wallet.ts    # Freighter wallet integration

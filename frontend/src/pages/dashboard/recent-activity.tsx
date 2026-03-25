@@ -30,7 +30,7 @@ export function RecentActivity({ activities }: RecentActivityProps) {
                      <p className="text-sm">
                        <span className="font-bold">{activity.user}</span>{" "}
                        {isEnrolled ? "enrolled in" : isCompleted ? "completed a milestone in" : "created"}{" "}
-                       <span className="font-bold">{activity.workspaceName}</span>
+                       <span className="font-bold">{activity.questName}</span>
                      </p>
                      <p className="text-xs text-muted-foreground font-bold mt-1">
                        {new Date(activity.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}

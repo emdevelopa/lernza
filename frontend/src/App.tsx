@@ -4,31 +4,31 @@ import { SpeedInsights } from "@vercel/speed-insights/react"
 import { Navbar } from "@/components/navbar"
 import { Landing } from "@/pages/landing"
 import { Dashboard } from "@/pages/dashboard"
-import { WorkspaceView } from "@/pages/workspace"
+import { QuestView } from "@/pages/quest"
 import { Profile } from "@/pages/profile"
 import { NotFound } from "@/pages/not-found"
 import { CreateQuest } from "@/pages/create-quest"
 
 const VALID_PAGES = ["landing", "dashboard", "profile", "create-quest"] as const
-type Page = (typeof VALID_PAGES)[number] | "workspace" | "404"
+type Page = (typeof VALID_PAGES)[number] | "quest" | "404"
 
-function pathToPage(pathname: string): { page: Page; workspaceId: number | null } {
+function pathToPage(pathname: string): { page: Page; questId: number | null } {
   const clean = pathname.replace(/\/+$/, "") || "/"
 
-  if (clean === "/") return { page: "landing", workspaceId: null }
-  if (clean === "/dashboard") return { page: "dashboard", workspaceId: null }
-  if (clean === "/profile") return { page: "profile", workspaceId: null }
-  if (clean === "/create-quest") return { page: "create-quest", workspaceId: null }
+  if (clean === "/") return { page: "landing", questId: null }
+  if (clean === "/dashboard") return { page: "dashboard", questId: null }
+  if (clean === "/profile") return { page: "profile", questId: null }
+  if (clean === "/create-quest") return { page: "create-quest", questId: null }
 
-  const wsMatch = clean.match(/^\/workspace\/(\d+)$/)
-  if (wsMatch) return { page: "workspace", workspaceId: Number(wsMatch[1]) }
+  const questMatch = clean.match(/^\/quest\/(\d+)$/)
+  if (questMatch) return { page: "quest", questId: Number(questMatch[1]) }
 
-  return { page: "404", workspaceId: null }
+  return { page: "404", questId: null }
 }
 
-function pageToPath(page: Page, workspaceId: number | null): string {
+function pageToPath(page: Page, questId: number | null): string {
   if (page === "landing") return "/"
-  if (page === "workspace" && workspaceId !== null) return `/workspace/${workspaceId}`
+  if (page === "quest" && questId !== null) return `/quest/${questId}`
   return `/${page}`
 }
 
@@ -45,22 +45,22 @@ function App() {
     const page = (VALID_PAGES as readonly string[]).includes(p) ? (p as Page) : "404"
     const path = pageToPath(page, null)
     window.history.pushState(null, "", path)
-    setState({ page, workspaceId: null })
+    setState({ page, questId: null })
     window.scrollTo({ top: 0, behavior: "smooth" })
   }, [])
 
-  const handleSelectWorkspace = useCallback((id: number) => {
-    const path = pageToPath("workspace", id)
+  const handleSelectQuest = useCallback((id: number) => {
+    const path = pageToPath("quest", id)
     window.history.pushState(null, "", path)
-    setState({ page: "workspace", workspaceId: id })
+    setState({ page: "quest", questId: id })
     window.scrollTo({ top: 0, behavior: "smooth" })
   }, [])
 
   const renderPage = () => {
-    if (state.page === "workspace" && state.workspaceId !== null) {
+    if (state.page === "quest" && state.questId !== null) {
       return (
-        <WorkspaceView
-          workspaceId={state.workspaceId}
+        <QuestView
+          questId={state.questId}
           onBack={() => handleNavigate("dashboard")}
         />
       )
@@ -71,7 +71,7 @@ function App() {
       case "dashboard":
         return (
           <Dashboard
-            onSelectWorkspace={handleSelectWorkspace}
+            onSelectQuest={handleSelectQuest}
             onCreateQuest={() => handleNavigate("create-quest")}
           />
         )

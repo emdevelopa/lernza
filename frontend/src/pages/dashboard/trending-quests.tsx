@@ -2,10 +2,10 @@ import { Sparkles, Users, Coins } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { formatTokens } from "@/lib/utils"
-import type { Workspace } from "@/lib/mock-data"
+import type { Quest } from "@/lib/mock-data"
 
 interface TrendingQuestsProps {
-  quests: Workspace[]
+  quests: Quest[]
   onSelectQuest: (id: number) => void
 }
 

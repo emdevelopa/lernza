@@ -18,30 +18,30 @@ import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { useInView, useCountUp } from "@/hooks/use-animations"
 import {
-  MOCK_WORKSPACES,
+  MOCK_QUESTS,
   MOCK_MILESTONES,
   MOCK_ENROLLEES,
   MOCK_COMPLETIONS,
 } from "@/lib/mock-data"
 import { formatTokens } from "@/lib/utils"
 
-interface WorkspaceViewProps {
-  workspaceId: number
+interface QuestViewProps {
+  questId: number
   onBack: () => void
 }
 
 type Tab = "milestones" | "enrollees"
 
-export function WorkspaceView({ workspaceId, onBack }: WorkspaceViewProps) {
+export function QuestView({ questId, onBack }: QuestViewProps) {
   const [activeTab, setActiveTab] = useState<Tab>("milestones")
   const [expandedMilestone, setExpandedMilestone] = useState<number | null>(
     null
   )
 
-  const ws = MOCK_WORKSPACES.find((w) => w.id === workspaceId)
-  const milestones = MOCK_MILESTONES[workspaceId] || []
-  const enrollees = MOCK_ENROLLEES[workspaceId] || []
-  const completions = MOCK_COMPLETIONS[workspaceId] || []
+  const ws = MOCK_QUESTS.find((w) => w.id === questId)
+  const milestones = MOCK_MILESTONES[questId] || []
+  const enrollees = MOCK_ENROLLEES[questId] || []
+  const completions = MOCK_COMPLETIONS[questId] || []
 
   const [statsRef, statsInView] = useInView()
   const [contentRef, contentInView] = useInView()

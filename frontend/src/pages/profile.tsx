@@ -106,25 +106,25 @@ export function Profile() {
   const earnings = [
     {
       milestone: "Hello World",
-      workspace: "Learn to Code with Alex",
+      quest: "Learn to Code with Alex",
       amount: 50,
       date: "2 days ago",
     },
     {
       milestone: "Build a CLI Tool",
-      workspace: "Learn to Code with Alex",
+      quest: "Learn to Code with Alex",
       amount: 100,
       date: "5 days ago",
     },
     {
       milestone: "Set up Stellar CLI",
-      workspace: "Stellar Dev Bootcamp",
+      quest: "Stellar Dev Bootcamp",
       amount: 100,
       date: "1 week ago",
     },
     {
       milestone: "First Soroban Contract",
-      workspace: "Stellar Dev Bootcamp",
+      quest: "Stellar Dev Bootcamp",
       amount: 200,
       date: "2 weeks ago",
     },
@@ -233,7 +233,7 @@ export function Profile() {
                         <div>
                           <p className="font-black text-sm">{e.milestone}</p>
                           <p className="text-xs font-bold text-muted-foreground">
-                            {e.workspace}
+                            {e.quest}
                           </p>
                         </div>
                       </div>

@@ -15,7 +15,7 @@ export function PersonalProgress({ stats }: PersonalProgressProps) {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div className="bg-secondary border-[2px] border-black p-4 shadow-[3px_3px_0_#000]">
           <p className="text-xs font-bold text-muted-foreground uppercase text-center">Enrolled</p>
-          <p className="text-2xl font-black mt-1 text-center">{stats.workspacesEnrolled}</p>
+          <p className="text-2xl font-black mt-1 text-center">{stats.questsEnrolled}</p>
         </div>
         <div className="bg-secondary border-[2px] border-black p-4 shadow-[3px_3px_0_#000]">
           <p className="text-xs font-bold text-muted-foreground uppercase text-center">Completed</p>
@@ -23,7 +23,7 @@ export function PersonalProgress({ stats }: PersonalProgressProps) {
         </div>
         <div className="bg-secondary border-[2px] border-black p-4 shadow-[3px_3px_0_#000]">
           <p className="text-xs font-bold text-muted-foreground uppercase text-center">Owned</p>
-          <p className="text-2xl font-black mt-1 text-center">{stats.workspacesOwned}</p>
+          <p className="text-2xl font-black mt-1 text-center">{stats.questsOwned}</p>
         </div>
         <div className="bg-primary border-[2px] border-black p-4 shadow-[3px_3px_0_#000]">
           <p className="text-xs font-bold text-black uppercase text-center">Earnings</p>

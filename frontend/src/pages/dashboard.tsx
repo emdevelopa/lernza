@@ -16,7 +16,7 @@ import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { useWallet } from "@/hooks/use-wallet"
 import {
-  MOCK_WORKSPACES,
+  MOCK_QUESTS,
   MOCK_MILESTONES,
   MOCK_COMPLETIONS,
   MOCK_PLATFORM_STATS,
@@ -36,15 +36,15 @@ import { RecentActivity } from "./dashboard/recent-activity"
 // Lazy-loaded chart
 const EarningsChart = React.lazy(() => import("./dashboard/earnings-chart"))
 
-// The first two workspaces share the same owner — treat them as "owned"
+// The first two quests share the same owner — treat them as "owned"
 const MOCK_OWNER = "GBXR...K2YQ"
 
 interface DashboardProps {
-  onSelectWorkspace: (id: number) => void
+  onSelectQuest: (id: number) => void
   onCreateQuest: () => void
 }
 
-export function Dashboard({ onSelectWorkspace, onCreateQuest }: DashboardProps) {
+export function Dashboard({ onSelectQuest, onCreateQuest }: DashboardProps) {
   const { connected, connect, shortAddress } = useWallet()
   const [filter, setFilter] = useState<"all" | "owned" | "enrolled">("all")
 
@@ -119,7 +119,7 @@ export function Dashboard({ onSelectWorkspace, onCreateQuest }: DashboardProps) 
   }
 
   // Apply filter
-  const filteredWorkspaces = MOCK_WORKSPACES.filter((ws) => {
+  const filteredQuests = MOCK_QUESTS.filter((ws) => {
     if (filter === "owned") return ws.owner === MOCK_OWNER
     if (filter === "enrolled") return ws.owner !== MOCK_OWNER
     return true
@@ -140,7 +140,7 @@ export function Dashboard({ onSelectWorkspace, onCreateQuest }: DashboardProps) 
               {shortAddress}
             </h1>
             <p className="text-sm font-bold opacity-70 mt-1">
-              You have {MOCK_USER_STATS.workspacesEnrolled} active quests
+              You have {MOCK_USER_STATS.questsEnrolled} active quests
             </p>
           </div>
           <Button
@@ -193,7 +193,7 @@ export function Dashboard({ onSelectWorkspace, onCreateQuest }: DashboardProps) 
             </div>
 
             <div className="grid gap-5 relative">
-              {filteredWorkspaces.map((ws, i) => {
+              {filteredQuests.map((ws, i) => {
                 const milestones = MOCK_MILESTONES[ws.id] || []
                 const completions = MOCK_COMPLETIONS[ws.id] || []
                 const totalMilestones = milestones.length
@@ -217,7 +217,7 @@ export function Dashboard({ onSelectWorkspace, onCreateQuest }: DashboardProps) 
                   <Card
                     key={ws.id}
                     className={`card-tilt cursor-pointer group animate-fade-in-up stagger-${i + 1}`}
-                    onClick={() => onSelectWorkspace(ws.id)}
+                    onClick={() => onSelectQuest(ws.id)}
                   >
                     <CardHeader className="pb-3">
                       <div className="flex items-start justify-between">
@@ -292,7 +292,7 @@ export function Dashboard({ onSelectWorkspace, onCreateQuest }: DashboardProps) 
               })}
             </div>
 
-            {filteredWorkspaces.length === 0 && (
+            {filteredQuests.length === 0 && (
               <Card className="animate-fade-in-up mt-5">
                 <CardContent className="flex flex-col items-center justify-center py-16 text-center">
                   <div className="w-16 h-16 bg-primary border-[3px] border-black shadow-[4px_4px_0_#000] flex items-center justify-center mb-6">
@@ -324,7 +324,7 @@ export function Dashboard({ onSelectWorkspace, onCreateQuest }: DashboardProps) 
         <div className="space-y-8 animate-fade-in-up stagger-3">
           <TrendingQuests 
             quests={MOCK_TRENDING_QUESTS} 
-            onSelectQuest={onSelectWorkspace} 
+            onSelectQuest={onSelectQuest} 
           />
           <RecentActivity activities={MOCK_RECENT_ACTIVITY} />
         </div>
